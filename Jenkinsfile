@@ -1,18 +1,18 @@
 pipeline {
     agent any 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('test1')
+        DOCKERHUB_CREDENTIALS = credentials('pop03')
     }
     stages {
         stage('Build docker image') {
             steps {  
                 echo "Building Docker image..."
-                sh 'docker build -t jenish007/flaskapp:$BUILD_NUMBER .'
+                sh 'docker build -t gerwin03/flaskapp:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'test1', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'pop03', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                     echo "Logging in to Docker Hub..."
                     sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
                 }
