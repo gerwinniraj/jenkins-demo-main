@@ -21,13 +21,13 @@ pipeline {
         stage('push image') {
             steps {
                 echo "Pushing Docker image to Docker Hub..."
-                sh 'docker push jenish007/flaskapp:$BUILD_NUMBER'
+                sh 'docker push gerwin03/flaskapp:$BUILD_NUMBER'
             }
         }
         stage('Deploy to Staging') {
             steps {
                 // Pull the latest image from Docker Hub
-                sh 'docker pull jenish007/flaskapp:$BUILD_NUMBER'
+                sh 'docker pull gerwin03/flaskapp:$BUILD_NUMBER'
 
                 // Stop and remove any existing containers
                 sh 'docker stop myapp-container || true'
